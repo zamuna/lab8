@@ -18,8 +18,7 @@ block content
             p: !{ data.hName }
                 input(type='hidden', name='idDelete', value='#{data._id}')           
                 input(type='submit', value='Delete')
-                input(type='submit', value='Update')
-                button.editBtn.btn.btn-info(type='button', data-toggle='modal', data-target='#myModal',name=JSON.stringify(data)) Open Modal
+                button.editBtn.btn.btn-info(type='button', data-toggle='modal', data-target='#myModal',name=JSON.stringify(data)) Update
     #myModal.modal.fade(role='dialog')
         .modal-dialog
             // Modal content

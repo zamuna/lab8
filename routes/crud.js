@@ -24,6 +24,22 @@ router.post("/", function (req, res, next) {
 
   res.render('crud', { title: 'Crud Operation','results': results_from_mongo });
 });
+router.post('/update',function (req,res,next) {
+const db=req.db;
+const id=req.body.id;
+
+const obj = {
+name: req.body.name,
+category: req.body.category,
+longitude: req.body.longitude,
+latitude: req.body.latitude
+};
+
+db.locations.update({'_id':objectId(id)}, obj, function (err, data) {
+res.redirect('/');
+});
+
+});
 
 module.exports = router;
 
