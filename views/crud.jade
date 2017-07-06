@@ -1,0 +1,52 @@
+extends layout
+block content
+    h1=title
+     fieldset.gllpLatlonPicker
+      input.gllpSearchField(type='text')
+      input.gllpSearchButton(type='button', value='search')
+      .gllpMap Google Maps
+      input.gllpLatitude(type='hidden', value='20'  form='form' name='lat')
+      input.gllpLongitude(type='hidden', value='20'  form='form' name='long')
+      input.gllpZoom(type='hidden', value='3')
+      form#form(method='post', action='/crud')
+        input(type='text', name='hName', placeholder='Enter Name')
+        input(type='text', name='category', paceholder='Category')
+        input(type='submit', value='Submit')
+    h2 Results 
+     for data in results
+        form#formDel(method='post', action='/delete')
+            p: !{ data.hName }
+                input(type='hidden', name='idDelete', value='#{data._id}')           
+                input(type='submit', value='Delete')
+                input(type='submit', value='Update')
+                button.editBtn.btn.btn-info(type='button', data-toggle='modal', data-target='#myModal',name=JSON.stringify(data)) Open Modal
+    #myModal.modal.fade(role='dialog')
+        .modal-dialog
+            // Modal content
+        .modal-content
+            .modal-header
+             button.close(type='button', data-dismiss='modal') ×
+             h4.modal-title Modal Header
+            .modal-body
+            h1=title
+             form#formUpdate(method='post', action='/update')
+                            input#editId(type='hidden', name='_id')
+                            div.form-group
+                                label(for='name') Name
+                                input#editName.form-control(type='text', name='name', placeholder='Name')
+                            div.form-group
+                                label(for='category') Category
+                                input#editCategory.form-control(type='text', name='category', placeholder='Category')
+                            div.form-group
+                                label(for='longitude') Longitude
+                                input#editLongitude.form-control(type='text', name='longitude', placeholder='Longitude')
+                            div.form-group
+                                label(for='latitude') Latitude
+                                input#editLatitude.form-control(type='text', name='latitude', placeholder='Latitude')
+                            button#updateLocation.btn.btn-default Update Location
+                            button.btn.btn-default(type='button', data-dismiss='modal') Close
+            .modal-footer
+             button.btn.btn-default(type='button', data-dismiss='modal') Close
+
+
+
